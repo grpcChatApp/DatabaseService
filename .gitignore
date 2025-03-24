@@ -455,3 +455,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 **/Migrations/**
+appsettings.Development.json
+Properties/**

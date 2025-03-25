@@ -1,9 +1,14 @@
 using DatabaseService;
-using DatabaseService.Integration;
+using DatabaseService.Initializer;
+using DatabaseService.Integrations.Grpc.AuthenticationServer;
+using DatabaseService.Integrations.Kafka;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 internal class Program
 {
+    private static ILogger<Program> _logger;
+
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
@@ -14,16 +19,20 @@ internal class Program
         builder.Services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(connectionString, b => b.MigrationsAssembly("DatabaseService")));
 
+        // Register dependencies
         ConfigureServices(builder.Services, builder.Configuration);
-
         var app = builder.Build();
+        _logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+        SeedDatabase(app.Services);
 
         // Configure Middleware
         app.UseSwagger();
         app.UseSwaggerUI();
 
+        app.UseRouting();
         app.UseAuthorization();
-        app.MapControllers();
+        app.UseEndpoints(endpoints => endpoints.MapGrpcService<AuthenticationService>());
         app.Run();
     }
 
@@ -37,6 +46,23 @@ internal class Program
         configuration.GetSection("Configurations").Bind(applicationSettings);
         services.AddSingleton(applicationSettings);
 
-        services.AddHostedService<KafkaConsumerService>();
+        services.AddHostedService<ConsumerService>();
+    }
+
+    private static void SeedDatabase(IServiceProvider serviceProvider)
+    {
+        using (var scope = serviceProvider.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            try
+            {
+                DatabaseInitializer.Seed(services);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while seeding the database.");
+            }
+        }
+
     }
 }

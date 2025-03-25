@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option csharp_namespace = "DatabaseService.Integration.AuthenticationServer";
+
+package authdata;
+
+message ApiScope {
+    int32 id = 1;
+    string name = 2;
+}
+
+message ApiResource {
+    int32 id = 1;
+    string name = 2;
+    repeated int32 scope_ids = 3;
+}
+
+message Client {
+    int32 id = 1;
+    string client_id = 2;
+    repeated int32 allowed_scope_ids = 3;
+}
+
+message EmptyRequest {}
+message ApiScopesResponse { repeated ApiScope scopes = 1; }
+message ApiResourcesResponse { repeated ApiResource resources = 1; }
+message ClientsResponse { repeated Client clients = 1; }
+
+service AuthDataService {
+    rpc GetApiScopes (EmptyRequest) returns (ApiScopesResponse);
+    rpc GetApiResources (EmptyRequest) returns (ApiResourcesResponse);
+    rpc GetClients (EmptyRequest) returns (ClientsResponse);
+}

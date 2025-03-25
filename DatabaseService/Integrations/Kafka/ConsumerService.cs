@@ -5,9 +5,9 @@ using Common.Data.KafkaEvents;
 using Confluent.Kafka;
 using System.Text.Json;
 
-namespace DatabaseService.Integration
+namespace DatabaseService.Integrations.Kafka
 {
-    public class KafkaConsumerService : BackgroundService
+    public class ConsumerService : BackgroundService
     {
         private readonly string[] _kafkaTopics = [
             KafkaTopics.Client.Create,
@@ -21,7 +21,7 @@ namespace DatabaseService.Integration
         private readonly IConsumer<string, string> _consumer;
         private ConsumerConfig _consumerConfig;
 
-        public KafkaConsumerService(ApplicationSettings applicationSettings, ILogger logger)
+        public ConsumerService(ApplicationSettings applicationSettings, ILogger logger)
         {
             _configuration = applicationSettings;
             _logger = logger;

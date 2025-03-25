@@ -16,8 +16,8 @@ namespace DatabaseService
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-               .HasIndex(u => u.Username)
-               .IsUnique();
+                .HasIndex(u => u.Name)
+                .IsUnique();
 
             modelBuilder.Entity<ApiResource>()
                 .HasMany(r => r.Scopes)
@@ -28,20 +28,6 @@ namespace DatabaseService
                 .HasMany(c => c.AllowedScopes)
                 .WithOne()
                 .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<ApiScope>().HasData(
-                new ApiScope { Id = (int)PermissionsEnum.None, Name = Enum.GetName(PermissionsEnum.None)! },
-                new ApiScope { Id = (int)PermissionsEnum.Read, Name = Enum.GetName(PermissionsEnum.Read)! },
-                new ApiScope { Id = (int)PermissionsEnum.Write, Name = Enum.GetName(PermissionsEnum.Write)! }
-            );
-
-            modelBuilder.Entity<ApiResource>().HasData(
-                new ApiResource { Id = 1, Name = ServiceNames.ClientApp },
-                new ApiResource { Id = 2, Name = ServiceNames.BrokerService },
-                new ApiResource { Id = 3, Name = ServiceNames.DatabaseService },
-                new ApiResource { Id = 4, Name = ServiceNames.BackendHostService },
-                new ApiResource { Id = 5, Name = ServiceNames.AuthenticationServer }
-            );
         }
     }
 }

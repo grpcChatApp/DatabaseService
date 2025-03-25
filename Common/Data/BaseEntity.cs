@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public required string Guid { get; set; }
+        public string Guid { get; set; } = string.Empty;
 
         public DateTime CreatedDate { get; set; }
     }

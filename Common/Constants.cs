@@ -17,7 +17,8 @@
             Read = 2,
             Write = 3,
         }
-        
+
+        public const string KafkaDatabaseGroupId = "database-service-group";
 
         public const string DateFormat = "yyyy-MM-dd HH:mm:ss";
     }

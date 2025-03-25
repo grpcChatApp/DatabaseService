@@ -10,14 +10,15 @@ namespace Common.Data
     {
         public class User 
         {
-            public const string Registered = "user.registered";
-            public const string Updated = "user.updated";
+            public const string Create = "user.create";
+            public const string Update = "user.update";
+            public const string Delete = "user.delete";
         }
 
         public class Client
         {
-            public const string Registered = "client.registered";
-            public const string Disposed = "client.disposed";
+            public const string Create = "client.create";
+            public const string Delete = "client.delete";
         }
     }
 

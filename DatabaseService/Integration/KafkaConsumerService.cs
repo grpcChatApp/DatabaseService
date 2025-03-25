@@ -1,7 +1,9 @@
 ﻿
 using Common;
 using Common.Data;
+using Common.Data.KafkaEvents;
 using Confluent.Kafka;
+using System.Text.Json;
 
 namespace DatabaseService.Integration
 {
@@ -46,16 +48,20 @@ namespace DatabaseService.Integration
                         var result = _consumer.Consume(stoppingToken);
                         if (result != null)
                         {
+                            UserEvent userEvent = null;
                             switch (result.Topic)
                             {
                                 case KafkaTopics.User.Create:
-                                    HandleUserCreate(result.Message.Value);
+                                    userEvent = JsonSerializer.Deserialize<UserEvent>(result.Message.Value);
+                                    HandleUserCreate(userEvent);
                                     break;
                                 case KafkaTopics.User.Delete:
-                                    HandleUserDelete(result.Message.Value);
+                                    userEvent = JsonSerializer.Deserialize<UserEvent>(result.Message.Value);
+                                    HandleUserDelete(userEvent);
                                     break;
                                 case KafkaTopics.User.Update:
-                                    HandleUserUpdate(result.Message.Value);
+                                    userEvent = JsonSerializer.Deserialize<UserEvent>(result.Message.Value);
+                                    HandleUserUpdate(userEvent);
                                     break;
                                 case KafkaTopics.Client.Create:
                                     HandleClientCreate(result.Message.Value);
@@ -83,19 +89,19 @@ namespace DatabaseService.Integration
             return Task.CompletedTask;
         }
 
-        private void HandleUserCreate(string message)
+        private void HandleUserCreate(UserEvent message)
         {
-            _logger.LogInformation($"Processing user creation event: {message}");
+            _logger.LogInformation($"Processing user creation event: {message.Name}");
         }
 
-        private void HandleUserDelete(string message)
+        private void HandleUserDelete(UserEvent message)
         {
-            _logger.LogInformation($"Processing user deletion event: {message}");
+            _logger.LogInformation($"Processing user deletion event: {message.Name}");
         }
 
-        private void HandleUserUpdate(string message)
+        private void HandleUserUpdate(UserEvent message)
         {
-            _logger.LogInformation($"Processing user updation event: {message}");
+            _logger.LogInformation($"Processing user updation event: {message.Name}");
         }
 
         private void HandleClientCreate(string message)

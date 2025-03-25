@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Common;
-using Common.Data;
+﻿using Common.Data;
+using Microsoft.EntityFrameworkCore;
 using static Common.Constants;
 
 namespace DatabaseService

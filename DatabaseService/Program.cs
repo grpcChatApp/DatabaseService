@@ -7,7 +7,7 @@ var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? throw new 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Default connection string not set.");
 connectionString = connectionString.Replace("{DB_PASSWORD}", dbPassword);
 builder.Services.AddDbContext<DatabaseContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("DatabaseService")));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

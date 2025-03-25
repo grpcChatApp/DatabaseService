@@ -13,9 +13,9 @@
 
         public enum PermissionsEnum
         {
-            None = 0,
-            Read = 1,
-            Write = 2,
+            None = 1,
+            Read = 2,
+            Write = 3,
         }
         
 

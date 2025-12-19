@@ -4,30 +4,30 @@ option csharp_namespace = "DatabaseService.Services.AuthenticationServer";
 
 package authdata;
 
-message ApiScope {
+message ApiScopeDto {
     int32 id = 1;
     string name = 2;
 }
 
-message ApiResource {
+message ApiResourceDto {
     int32 id = 1;
     string name = 2;
     repeated int32 scope_ids = 3;
 }
 
-message Client {
+message ClientDto {
     int32 id = 1;
     string client_id = 2;
     repeated int32 allowed_scope_ids = 3;
 }
 
-message EmptyRequest {}
-message ApiScopesResponse { repeated ApiScope scopes = 1; }
-message ApiResourcesResponse { repeated ApiResource resources = 1; }
-message ClientsResponse { repeated Client clients = 1; }
+message EmptyRequestDto {}
+message ApiScopesResponseDto { repeated ApiScopeDto scopes = 1; }
+message ApiResourcesResponseDto { repeated ApiResourceDto resources = 1; }
+message ClientsResponseDto { repeated ClientDto clients = 1; }
 
 service AuthDataService {
-    rpc GetApiScopes (EmptyRequest) returns (ApiScopesResponse);
-    rpc GetApiResources (EmptyRequest) returns (ApiResourcesResponse);
-    rpc GetClients (EmptyRequest) returns (ClientsResponse);
+    rpc GetApiScopes (EmptyRequestDto) returns (ApiScopesResponseDto);
+    rpc GetApiResources (EmptyRequestDto) returns (ApiResourcesResponseDto);
+    rpc GetClients (EmptyRequestDto) returns (ClientsResponseDto);
 }

@@ -1,22 +1,21 @@
 ﻿
 using Common;
-using Common.Data;
 using Common.Data.KafkaEvents;
 using Confluent.Kafka;
 using System.Text.Json;
-using DatabaseService.Data.Models;
 using DatabaseService.Data.KafkaEvents;
+using DatabaseService.Data.Models;
 
 namespace DatabaseService.Services.KafkaConsumerService
 {
     public class ConsumerService : BackgroundService
     {
         private readonly string[] _kafkaTopics = [
-            KafkaTopics.Client.Create,
-            KafkaTopics.Client.Delete,
-            KafkaTopics.User.Create,
-            KafkaTopics.User.Update,
-            KafkaTopics.User.Delete,
+            KafkaTopics.Client.Created,
+            KafkaTopics.Client.Deleted,
+            KafkaTopics.User.Created,
+            KafkaTopics.User.Updated,
+            KafkaTopics.User.Deleted,
         ];
         private readonly ApplicationSettings _configuration;
         private readonly ILogger _logger;
@@ -53,22 +52,22 @@ namespace DatabaseService.Services.KafkaConsumerService
                             UserEvent userEvent = null;
                             switch (result.Topic)
                             {
-                                case KafkaTopics.User.Create:
+                                case KafkaTopics.User.Created:
                                     userEvent = JsonSerializer.Deserialize<UserEvent>(result.Message.Value);
                                     HandleUserCreate(userEvent);
                                     break;
-                                case KafkaTopics.User.Delete:
+                                case KafkaTopics.User.Deleted:
                                     userEvent = JsonSerializer.Deserialize<UserEvent>(result.Message.Value);
                                     HandleUserDelete(userEvent);
                                     break;
-                                case KafkaTopics.User.Update:
+                                case KafkaTopics.User.Updated:
                                     userEvent = JsonSerializer.Deserialize<UserEvent>(result.Message.Value);
                                     HandleUserUpdate(userEvent);
                                     break;
-                                case KafkaTopics.Client.Create:
+                                case KafkaTopics.Client.Created:
                                     HandleClientCreate(result.Message.Value);
                                     break;
-                                case KafkaTopics.Client.Delete:
+                                case KafkaTopics.Client.Deleted:
                                     HandleClientDelete(result.Message.Value);
                                     break;
                                 default:
@@ -93,17 +92,17 @@ namespace DatabaseService.Services.KafkaConsumerService
 
         private void HandleUserCreate(UserEvent message)
         {
-            _logger.LogInformation($"Processing user creation event: {message.Name}");
+            _logger.LogInformation($"Processing user creation event: {message.EventName}");
         }
 
         private void HandleUserDelete(UserEvent message)
         {
-            _logger.LogInformation($"Processing user deletion event: {message.Name}");
+            _logger.LogInformation($"Processing user deletion event: {message.EventName}");
         }
 
         private void HandleUserUpdate(UserEvent message)
         {
-            _logger.LogInformation($"Processing user updation event: {message.Name}");
+            _logger.LogInformation($"Processing user updation event: {message.EventName}");
         }
 
         private void HandleClientCreate(string message)

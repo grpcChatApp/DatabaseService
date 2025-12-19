@@ -1,5 +1,4 @@
-﻿using DatabaseService.Data.Models;
-using DatabaseService.Services.AuthenticationServer;
+﻿using DatabaseService.Services.AuthenticationServer;
 using Grpc.Core;
 using DatabaseService.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -14,22 +13,22 @@ namespace DatabaseService.Services.AuthenticationService
             _context = context;
         }
 
-        public override async Task<ApiScopesResponse> GetApiScopes(EmptyRequest request, ServerCallContext context)
+        public override async Task<ApiScopesResponseDto> GetApiScopes(EmptyRequestDto request, ServerCallContext context)
         {
             var scopes = await _context.ApiScopes.ToListAsync();
-            return new ApiScopesResponse
+            return new ApiScopesResponseDto
             {
-                Scopes = { scopes.Select(s => new AuthenticationServer.ApiScope { Id = s.Id, Name = s.Name }) }
+                Scopes = { scopes.Select(s => new ApiScopeDto { Id = s.Id, Name = s.Name }) }
             };
         }
 
-        public override async Task<ApiResourcesResponse> GetApiResources(EmptyRequest request, ServerCallContext context)
+        public override async Task<ApiResourcesResponseDto> GetApiResources(EmptyRequestDto request, ServerCallContext context)
         {
             var resources = await _context.ApiResources.Include(r => r.Scopes).ToListAsync();
-            return new ApiResourcesResponse
+            return new ApiResourcesResponseDto
             {
                 Resources = {
-                    resources.Select(r => new AuthenticationServer.ApiResource
+                    resources.Select(r => new ApiResourceDto
                     {
                         Id = r.Id,
                         Name = r.Name,
@@ -39,13 +38,13 @@ namespace DatabaseService.Services.AuthenticationService
             };
         }
 
-        public override async Task<ClientsResponse> GetClients(EmptyRequest request, ServerCallContext context)
+        public override async Task<ClientsResponseDto> GetClients(EmptyRequestDto request, ServerCallContext context)
         {
             var clients = await _context.Clients.Include(c => c.AllowedScopes).ToListAsync();
-            return new ClientsResponse
+            return new ClientsResponseDto
             {
                 Clients = {
-                    clients.Select(c => new AuthenticationServer.Client
+                    clients.Select(c => new ClientDto
                     {
                         Id = c.Id,
                         ClientId = c.ClientId,

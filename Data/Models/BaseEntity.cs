@@ -4,8 +4,10 @@
     {
         public int Id { get; set; }
 
-        public string Guid { get; set; } = string.Empty;
+        public Guid ReferenceId { get; set; } = Guid.Empty;
 
         public DateTime CreatedDate { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
     }
 }

@@ -11,15 +11,15 @@ namespace DatabaseService.Data.KafkaEvents
     {
         public class User 
         {
-            public const string Create = "user.create";
-            public const string Update = "user.update";
-            public const string Delete = "user.delete";
+            public const string Created = "user.created";
+            public const string Updated = "user.updated";
+            public const string Deleted = "user.deleted";
         }
 
         public class Client
         {
-            public const string Create = "client.create";
-            public const string Delete = "client.delete";
+            public const string Created = "client.created";
+            public const string Deleted = "client.deleted";
         }
     }
 

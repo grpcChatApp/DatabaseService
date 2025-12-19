@@ -1,8 +1,13 @@
-﻿namespace Common.Data.KafkaEvents
+namespace DatabaseService.Data.KafkaEvents
 {
     public class UserEvent : BaseEvent
+    {
+        public string Username { get; }
+
+        public UserEvent(string referenceId, string eventName, string username)
+            : base(referenceId, eventName)
         {
-        public string? Email { get; set; }
-        public DateTime ChangedDate { get; set; }
+            Username = username;
+        }
     }
 }

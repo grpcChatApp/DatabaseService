@@ -23,6 +23,7 @@ message CreateUserRequest
   string username = 1;
   string email = 2;
   string passwordHash = 3;
+  string name = 4;
 }
 
 message UserDto 
@@ -31,4 +32,5 @@ message UserDto
   string username = 2;
   string email = 3;
   bool isActive = 4;
+  string name = 5;
 }

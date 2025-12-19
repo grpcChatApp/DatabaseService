@@ -3,12 +3,14 @@ using DatabaseService.Contexts;
 using DatabaseService.Data.KafkaEvents;
 using DatabaseService.Data.Models;
 using GrpcChat.Database.Users;
-using Microsoft.Data.SqlClient;
+using Npgsql;
 using DatabaseService.Utilities;
+using DatabaseService.Contracts.Grpc;
+using DatabaseService.Contracts.Kalfka;
 
 namespace DatabaseService.Application.Users
 {
-    public sealed class UserRequestHandler(CoreContext db, IKafkaPublisher publisher)
+    public sealed class UserRequestHandler(CoreContext db, IKafkaPublisher publisher) : IUserRequestsHandler
     {
         public async Task<UserDto> CreateUser(
             CreateUserRequest request,

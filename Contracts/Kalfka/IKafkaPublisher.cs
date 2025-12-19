@@ -1,4 +1,7 @@
-public interface IKafkaPublisher
+namespace DatabaseService.Contracts.Kalfka
 {
-    Task PublishAsync<T>(string topic, T @event, CancellationToken cancellationToken = default);
+    public interface IKafkaPublisher
+    {
+        Task PublishAsync<T>(string topic, T @event, CancellationToken cancellationToken = default);
+    }
 }

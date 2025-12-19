@@ -2,6 +2,7 @@ using System.Text.Json;
 using Common.Data.KafkaEvents;
 using Confluent.Kafka;
 using DatabaseService.Data.KafkaEvents;
+using DatabaseService.Contracts.Kalfka;
 
 namespace DatabaseService.Services
 {

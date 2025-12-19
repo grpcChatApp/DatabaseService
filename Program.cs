@@ -1,10 +1,13 @@
 using DatabaseService.Contexts;
+using DatabaseService.Contracts.Grpc;
+using DatabaseService.Contracts.Kalfka;
 using DatabaseService.Data;
 using DatabaseService.Services;
 using DatabaseService;
 using Microsoft.EntityFrameworkCore;
 using DatabaseService.Services.AuthenticationService;
-
+using Confluent.Kafka;
+using DatabaseService.Application.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,38 +15,47 @@ var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? throw new 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Default connection string not set.");
 connectionString = connectionString.Replace("{DB_PASSWORD}", dbPassword);
 
-builder.Services.AddDbContext<CoreContext>(options =>
-    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("DatabaseService")));
-
-builder.Services.AddGrpc();
-builder.Services.AddLogging();
 // Register dependencies
 ConfigureServices(builder.Services, builder.Configuration);
+
 var app = builder.Build();
 var _logger = app.Services.GetRequiredService<ILogger<Program>>();
 
 SeedDatabase(app.Services);
 
 // Configure Middleware
-app.UseSwagger();
-app.UseSwaggerUI();
-
 app.UseRouting();
-app.UseAuthorization();
-app.UseEndpoints(endpoints => endpoints.MapGrpcService<AuthenticationService>());
+// app.UseAuthorization();
+MapEndpoints(app);
+
 app.Run();
 
 void ConfigureServices(IServiceCollection services, IConfiguration configuration)
 {
-    services.AddControllers();
-    services.AddEndpointsApiExplorer();
-    services.AddSwaggerGen();
-
     var applicationSettings = new ApplicationSettings();
     configuration.GetSection("Configurations").Bind(applicationSettings);
     services.AddSingleton(applicationSettings);
-
+    services.AddGrpc();
+    var producerConfig = new ProducerConfig();
+    configuration.GetSection("Kafka:Producer").Bind(producerConfig);
+    services.AddSingleton(producerConfig);
     services.AddScoped<IKafkaPublisher, KafkaPublisher>();
+    services.AddScoped<IUserRequestsHandler, UserRequestHandler>();
+    services.AddScoped<IClientRequestsHandler, ClientRequestsHandler>();
+    // Register concrete handlers as well so services that request the concrete type resolve
+    services.AddScoped<UserRequestHandler>();
+    services.AddScoped<ClientRequestsHandler>();
+    services.AddLogging();
+
+    services.AddDbContext<CoreContext>(options =>
+        options.UseNpgsql(connectionString, b => b.MigrationsAssembly("DatabaseService")));
+}
+
+void MapEndpoints(WebApplication app)
+{
+    app.MapGrpcService<AuthenticationService>();
+    app.MapGrpcService<ClientGrpcService>();
+    app.MapGrpcService<UserGrpcService>();
 }
 
 void SeedDatabase(IServiceProvider serviceProvider)

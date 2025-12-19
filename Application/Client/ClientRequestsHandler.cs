@@ -1,14 +1,17 @@
 using DatabaseService.Contexts;
+using DatabaseService.Contracts.Kalfka;
 using DatabaseService.Data.KafkaEvents;
 using DatabaseService.Data.Models;
 using Common.Data.KafkaEvents;
 using DatabaseService.Utilities;
 using GrpcChat.Database.Clients;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using DatabaseService.Contracts.Grpc;
 
 namespace DatabaseService.Application.Users
 {
-    public sealed class ClientRequestsHandler(CoreContext db, IKafkaPublisher publisher)
+    public sealed class ClientRequestsHandler(CoreContext db, IKafkaPublisher publisher) : IClientRequestsHandler
     {
         public async Task<ClientResponseDto> CreateClient(
             CreateClientRequest request,

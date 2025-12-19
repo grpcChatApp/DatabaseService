@@ -1,4 +1,5 @@
-﻿namespace Common.Data
+using DatabaseService.Data.Models;
+﻿namespace DatabaseService.Data.Models
 {
     public class ApiResource
     {

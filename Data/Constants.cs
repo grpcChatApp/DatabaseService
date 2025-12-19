@@ -18,6 +18,13 @@
             Write = 3,
         }
 
+        public enum SystemRoles
+        {
+            Admin = 1,
+            User = 2
+        }
+
+
         public const string KafkaDatabaseGroupId = "database-service-group";
 
         public const string DateFormat = "yyyy-MM-dd HH:mm:ss";

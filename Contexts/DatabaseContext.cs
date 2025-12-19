@@ -1,12 +1,13 @@
 ﻿using Common.Data;
+using DatabaseService.Data.Models;
+using DatabaseService.Data.KafkaEvents;
 using Microsoft.EntityFrameworkCore;
-using static Common.Constants;
 
-namespace DatabaseService
+namespace DatabaseService.Contexts
 {
-    public class DatabaseContext : DbContext
+    public class CoreContext : DbContext
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+        public CoreContext(DbContextOptions<CoreContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<ApiScope> ApiScopes { get; set; }

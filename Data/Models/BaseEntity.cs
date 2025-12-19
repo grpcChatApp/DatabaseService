@@ -1,4 +1,4 @@
-﻿namespace Common.Data
+﻿namespace DatabaseService.Data.Models
 {
     public class BaseEntity
     {

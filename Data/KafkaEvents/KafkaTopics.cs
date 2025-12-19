@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DatabaseService.Data.Models;
 
-namespace Common.Data
+namespace DatabaseService.Data.KafkaEvents
 {
     public static class KafkaTopics
     {

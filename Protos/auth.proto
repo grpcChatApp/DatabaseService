@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "DatabaseService.Integration.AuthenticationServer";
+option csharp_namespace = "DatabaseService.Services.AuthenticationServer";
 
 package authdata;
 

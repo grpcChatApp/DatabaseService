@@ -1,14 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DatabaseService.Integration.AuthenticationServer;
+﻿using DatabaseService.Data.Models;
+using DatabaseService.Services.AuthenticationServer;
 using Grpc.Core;
-
-namespace DatabaseService.Integrations.Grpc.AuthenticationServer
+using DatabaseService.Contexts;
+using Microsoft.EntityFrameworkCore;
+namespace DatabaseService.Services.AuthenticationService
 {
     public class AuthenticationService : AuthDataService.AuthDataServiceBase
     {
-        private readonly DatabaseContext _context;
+        private readonly CoreContext _context;
 
-        public AuthenticationService(DatabaseContext context)
+        public AuthenticationService(CoreContext context)
         {
             _context = context;
         }
@@ -18,7 +19,7 @@ namespace DatabaseService.Integrations.Grpc.AuthenticationServer
             var scopes = await _context.ApiScopes.ToListAsync();
             return new ApiScopesResponse
             {
-                Scopes = { scopes.Select(s => new ApiScope { Id = s.Id, Name = s.Name }) }
+                Scopes = { scopes.Select(s => new AuthenticationServer.ApiScope { Id = s.Id, Name = s.Name }) }
             };
         }
 
@@ -28,13 +29,13 @@ namespace DatabaseService.Integrations.Grpc.AuthenticationServer
             return new ApiResourcesResponse
             {
                 Resources = {
-                resources.Select(r => new ApiResource
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    ScopeIds = { r.Scopes.Select(s => s.Id) }
-                })
-            }
+                    resources.Select(r => new AuthenticationServer.ApiResource
+                    {
+                        Id = r.Id,
+                        Name = r.Name,
+                        ScopeIds = { r.Scopes.Select(s => s.Id) }
+                    })
+                }
             };
         }
 
@@ -44,13 +45,13 @@ namespace DatabaseService.Integrations.Grpc.AuthenticationServer
             return new ClientsResponse
             {
                 Clients = {
-                clients.Select(c => new Client
-                {
-                    Id = c.Id,
-                    ClientId = c.ClientId,
-                    AllowedScopeIds = { c.AllowedScopes.Select(s => s.Id) }
-                })
-            }
+                    clients.Select(c => new AuthenticationServer.Client
+                    {
+                        Id = c.Id,
+                        ClientId = c.ClientId,
+                        AllowedScopeIds = { c.AllowedScopes.Select(s => s.Id) }
+                    })
+                }
             };
         }
     }

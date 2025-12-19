@@ -1,0 +1,34 @@
+syntax = "proto3";
+option csharp_namespace = "GrpcChat.Database.Users";
+
+service UserService 
+{
+  rpc GetUserById(GetUserByIdRequest) returns (UserDto);
+  rpc GetUserByUsername(GetUserByUsernameRequest) returns (UserDto);
+  rpc CreateUser(CreateUserRequest) returns (UserDto);
+}
+
+message GetUserByIdRequest 
+{
+  string userId = 1;
+}
+
+message GetUserByUsernameRequest 
+{
+  string username = 1;
+}
+
+message CreateUserRequest 
+{
+  string username = 1;
+  string email = 2;
+  string passwordHash = 3;
+}
+
+message UserDto 
+{
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  bool isActive = 4;
+}

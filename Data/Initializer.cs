@@ -1,15 +1,15 @@
-﻿using Common.Data;
-using Microsoft.AspNetCore.DataProtection;
+﻿using DatabaseService.Contexts;
+using DatabaseService.Data.Models;
 using static Common.Constants;
 
-namespace DatabaseService.Initializer
+namespace DatabaseService.Data
 {
-    public static class DatabaseInitializer
+    public static class Initializer
     {
         public static void Seed(IServiceProvider serviceProvider)
         {
             using var scope = serviceProvider.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+            var context = scope.ServiceProvider.GetRequiredService<CoreContext>();
 
             if (!context.ApiScopes.Any())
             {

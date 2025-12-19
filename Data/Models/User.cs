@@ -1,4 +1,6 @@
-﻿namespace Common.Data
+using DatabaseService.Data.Models;
+using DatabaseService.Data.KafkaEvents;
+﻿namespace DatabaseService.Data.Models
 {
     public class User : BaseEntity
     {

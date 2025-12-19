@@ -4,8 +4,10 @@ using Common.Data;
 using Common.Data.KafkaEvents;
 using Confluent.Kafka;
 using System.Text.Json;
+using DatabaseService.Data.Models;
+using DatabaseService.Data.KafkaEvents;
 
-namespace DatabaseService.Integrations.Kafka
+namespace DatabaseService.Services.KafkaConsumerService
 {
     public class ConsumerService : BackgroundService
     {

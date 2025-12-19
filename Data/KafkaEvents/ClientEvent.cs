@@ -9,13 +9,11 @@ namespace Common.Data.KafkaEvents
 {
     class ClientEvent : BaseEvent
     {
-        public ClientEvent(string referenceId, string eventName, string clientId, string clientSecret) : base(referenceId, eventName)
+        public string ClientId { get; private set; }
+
+        public ClientEvent(string referenceId, string eventName, string clientId) : base(referenceId, eventName)
         {
             ClientId = clientId;
-            ClientSecret = clientSecret;
         }
-
-        public string ClientId { get; private set; }
-        public string ClientSecret { get; private  set; }
     }
 }

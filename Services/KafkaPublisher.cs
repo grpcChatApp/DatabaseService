@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Common.Data.KafkaEvents;
 using Confluent.Kafka;
 using DatabaseService.Data.KafkaEvents;
 
@@ -47,7 +48,8 @@ namespace DatabaseService.Services
         {
             return @event switch
             {
-                UserEvent e => e.ReferenceId.ToString(),
+                UserEvent e => e.ReferenceId,
+                ClientEvent e => e.ReferenceId,
                 _ => Guid.NewGuid().ToString()
             };
         }

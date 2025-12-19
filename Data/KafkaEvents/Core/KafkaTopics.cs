@@ -19,6 +19,7 @@ namespace DatabaseService.Data.KafkaEvents
         public class Client
         {
             public const string Created = "client.created";
+            public const string Updated = "client.updated";
             public const string Deleted = "client.deleted";
         }
     }

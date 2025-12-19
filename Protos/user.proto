@@ -3,14 +3,16 @@ option csharp_namespace = "GrpcChat.Database.Users";
 
 service UserService 
 {
-  rpc GetUserById(GetUserByIdRequest) returns (UserDto);
+  rpc GetUserByRefId(GetUserByRefIdRequest) returns (UserDto);
   rpc GetUserByUsername(GetUserByUsernameRequest) returns (UserDto);
   rpc CreateUser(CreateUserRequest) returns (UserDto);
+  rpc UpdateUser(UpdateUserRequest) returns (UserDto);
+  rpc DeleteUser(DeleteUserRequest) returns (UserDto);
 }
 
-message GetUserByIdRequest 
+message GetUserByRefIdRequest 
 {
-  string userId = 1;
+  string userReferenceId = 1;
 }
 
 message GetUserByUsernameRequest 
@@ -24,6 +26,20 @@ message CreateUserRequest
   string email = 2;
   string passwordHash = 3;
   string name = 4;
+}
+
+message UpdateUserRequest
+{
+  string referenceId = 1;
+  string username = 2;
+  string email = 3;
+  string passwordHash = 4;
+  string name = 5;
+}
+
+message DeleteUserRequest
+{
+  string referenceId = 1;
 }
 
 message UserDto 

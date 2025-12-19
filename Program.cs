@@ -1,6 +1,6 @@
 using DatabaseService.Contexts;
 using DatabaseService.Data;
-using DatabaseService.Services.KafkaConsumerService;
+using DatabaseService.Services;
 using DatabaseService;
 using Microsoft.EntityFrameworkCore;
 using DatabaseService.Services.AuthenticationService;
@@ -43,7 +43,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     configuration.GetSection("Configurations").Bind(applicationSettings);
     services.AddSingleton(applicationSettings);
 
-    services.AddHostedService<ConsumerService>();
+    services.AddScoped<IKafkaPublisher, KafkaPublisher>();
 }
 
 void SeedDatabase(IServiceProvider serviceProvider)

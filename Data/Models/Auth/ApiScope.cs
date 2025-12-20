@@ -1,8 +1,8 @@
-﻿namespace DatabaseService.Data.Models
+﻿using static Common.Constants;
+namespace DatabaseService.Data.Models
 {
-    public class ApiScope
+    public class ApiScope : BaseEntity
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
+        public required PermissionLevel Level { get; set; }
     }
 }

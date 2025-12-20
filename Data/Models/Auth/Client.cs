@@ -1,4 +1,6 @@
+using DatabaseService.Data.Models.Auth;
 using GrpcChat.Database.Clients;
+using static Common.Constants;
 using System.Security.Cryptography;
 namespace DatabaseService.Data.Models
 {
@@ -6,17 +8,20 @@ namespace DatabaseService.Data.Models
     {
         public string ClientId { get; set; } = string.Empty;
         public string ClientSecret { get; set; } = string.Empty;
-        public List<ApiScope> AllowedScopes { get; set; } = new List<ApiScope>();
+        public ClientType Type { get; set; }
+        public ICollection<ClientResourceMapping> AllowedScopes { get; set; } = new List<ClientResourceMapping>();
+        public ICollection<ClientScopeMapping> AllowedResources { get; set; } = new List<ClientScopeMapping>();
 
-        public static Client Create(string name) => new Client
+        public static Client Create(string name, string clientId = "", ClientType type = ClientType.Confidential) => new Client
         {
             ReferenceId = Guid.NewGuid().ToString("N"),
             Name = name,
             CreatedDate = DateTime.UtcNow,
             UpdatedDate = DateTime.UtcNow,
             IsActive = true,
-            ClientId = Guid.NewGuid().ToString("N"),
-            ClientSecret = GenerateClientSecret()
+            ClientId = string.IsNullOrEmpty(clientId) ? Guid.NewGuid().ToString("N") : clientId,
+            ClientSecret = GenerateClientSecret(),
+            Type = type
         };
 
         public ClientResponseDto ToDto()

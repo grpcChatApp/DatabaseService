@@ -2,20 +2,27 @@
 {
     public static class Constants
     {
-        public class ServiceNames
+        public class ProtectedServices
         {
-            public const string BackendHostService = "HostingService";
-            public const string BrokerService = "BrokerService";
-            public const string AuthenticationServer = "AuthenticationServer";
-            public const string DatabaseService = "DatabaseService";
-            public const string ClientApp = "ClientApp";
+            public const string HostApp = "host-app";
+            public const string BrokerService = "broker-api";
+            public const string AuthService = "auth-api";
+            public const string DatabaseService = "database-api";
+            public const string ClientApp = "chat-app";
         }
 
-        public enum PermissionsEnum
+        public enum PermissionLevel
         {
             None = 1,
             Read = 2,
             Write = 3,
+            Admin = 4
+        }
+
+        public enum ClientType
+        {
+            Confidential = 1,
+            Public = 2
         }
 
         public enum SystemRoles

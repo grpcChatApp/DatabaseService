@@ -24,7 +24,11 @@ namespace DatabaseService.Services.AuthenticationService
 
         public override async Task<ApiResourcesResponseDto> GetApiResources(EmptyRequestDto request, ServerCallContext context)
         {
-            var resources = await _context.ApiResources.Include(r => r.Scopes).ToListAsync();
+            var resources = await _context.ApiResources.ToListAsync();
+            var resourceWithMappedScopes = await _context.ResourceScopeMappings.Where(rsm => resources.Select(r => r.Id).Contains(rsm.ResourceId))
+                .Include(rsm => rsm.Scope)
+                .ToListAsync();
+
             return new ApiResourcesResponseDto
             {
                 Resources = {
@@ -32,7 +36,7 @@ namespace DatabaseService.Services.AuthenticationService
                     {
                         Id = r.Id,
                         Name = r.Name,
-                        ScopeIds = { r.Scopes.Select(s => s.Id) }
+                        ScopeIds = { resourceWithMappedScopes.Select(rsm => rsm.ScopeId) }
                     })
                 }
             };

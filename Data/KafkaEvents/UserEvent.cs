@@ -4,8 +4,8 @@ namespace DatabaseService.Data.KafkaEvents
     {
         public string Username { get; }
 
-        public UserEvent(string referenceId, string eventName, string username)
-            : base(referenceId, eventName)
+        public UserEvent(Guid referenceId, string eventName, string username)
+            : base(referenceId.ToString(), eventName)
         {
             Username = username;
         }

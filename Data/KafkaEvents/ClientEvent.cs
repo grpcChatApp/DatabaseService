@@ -11,7 +11,7 @@ namespace Common.Data.KafkaEvents
     {
         public string ClientId { get; private set; }
 
-        public ClientEvent(string referenceId, string eventName, string clientId) : base(referenceId, eventName)
+        public ClientEvent(Guid referenceId, string eventName, string clientId) : base(referenceId.ToString(), eventName)
         {
             ClientId = clientId;
         }

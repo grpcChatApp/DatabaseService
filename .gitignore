@@ -457,3 +457,8 @@ FodyWeavers.xsd
 **/Migrations/**
 appsettings.Development.json
 Properties/**
+
+# Flyway
+flyway.zip
+flyway/
+flyway-*/

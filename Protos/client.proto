@@ -12,12 +12,12 @@ service ClientService
 
 message GetClientByRefIdRequest 
 {
-  string referenceId = 1;
+  string reference_id = 1;
 }
 
 message GetClientByClientIdRequest 
 {
-  string clientId = 1;
+  string client_id = 1;
 }
 
 message CreateClientRequest 
@@ -27,21 +27,21 @@ message CreateClientRequest
 
 message UpdateClientRequest
 {
-  string referenceId = 1;
+  string reference_id = 1;
   string name = 2;
 }
 
 message DeleteClientRequest
 {
-  string referenceId = 1;
+  string reference_id = 1;
 }
 
 message ClientResponseDto 
 {
   string id = 1;
-  string clientId = 2;
-  string clientSecret = 3;
-  bool isActive = 4;
+  string client_id = 2;
+  string client_secret = 3;
+  bool is_active = 4;
   string name = 5;
-  string referenceId = 6;
+  string reference_id = 6;
 }

@@ -1,0 +1,742 @@
+{
+  "individualResults": [
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 12
+        }
+      ],
+      "migrationsExecuted": 1,
+      "success": false,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T20:51:13.986438300",
+      "operation": "migrate",
+      "exception": "Migration V2__tables.sql failed\n-------------------------------\nSQL State  : 42P01\nError Code : 0\nMessage    : ERROR: relation \"auth.clients\" does not exist\nLocation   : sql\\V2__tables.sql (C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql)\nLine       : 18\nStatement  : CREATE TABLE IF NOT EXISTS auth.client_resource_mappings (\r\n    client_id INT NOT NULL REFERENCES auth.clients(id) ON DELETE CASCADE,\r\n    resource_id INT NOT NULL REFERENCES auth.api_resources(id) ON DELETE CASCADE,\r\n    PRIMARY KEY (client_id, resource_id)\r\n)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "1",
+      "targetSchemaVersion": "4",
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 89
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 40
+        },
+        {
+          "category": "Versioned",
+          "version": "4",
+          "description": "post deploy seed",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V4__post_deploy_seed.sql",
+          "executionTime": 31
+        }
+      ],
+      "migrationsExecuted": 3,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T20:54:09.475172200",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "4",
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Repeatable",
+          "version": "",
+          "description": "post deploy seed",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql",
+          "executionTime": 55
+        }
+      ],
+      "migrationsExecuted": 1,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T21:01:58.709844400",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "4",
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T21:46:24.326640200",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "4",
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T21:50:46.005277300",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "4",
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T21:52:09.924317700",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "4",
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T21:52:53.471504300",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": "3",
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 12
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 30
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 6
+        },
+        {
+          "category": "Repeatable",
+          "version": "",
+          "description": "post deploy seed",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql",
+          "executionTime": 13
+        }
+      ],
+      "migrationsExecuted": 4,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T21:56:44.254407900",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 7
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 57
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 7
+        }
+      ],
+      "migrationsExecuted": 3,
+      "success": false,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T21:57:34.649477700",
+      "operation": "migrate",
+      "exception": "Migration R__post_deploy_seed.sql failed\n----------------------------------------\nSQL State  : 23502\nError Code : 0\nMessage    : ERROR: null value in column \"reference_id\" of relation \"api_scopes\" violates not-null constraint\n  Detail: Failing row contains (1, db.read, null, 1, t, 2025-12-21 21:57:35.097909+05:30, 2025-12-21 21:57:35.097909+05:30).\nLocation   : sql\\R__post_deploy_seed.sql (C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql)\nLine       : 1\nStatement  : INSERT INTO auth.api_scopes (name, level)\r\nVALUES\r\n    (\u0027db.read\u0027, 1),\r\n    (\u0027db.write\u0027, 2),\r\n    (\u0027kafka.publish\u0027, 2),\r\n    (\u0027chat.read\u0027, 1),\r\n    (\u0027chat.write\u0027, 2),\r\n    (\u0027host.users.create\u0027, 3)\r\nON CONFLICT (name) DO NOTHING\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 7
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 60
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 8
+        }
+      ],
+      "migrationsExecuted": 3,
+      "success": false,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T22:03:21.094842500",
+      "operation": "migrate",
+      "exception": "Migration R__post_deploy_seed.sql failed\n----------------------------------------\nSQL State  : 23502\nError Code : 0\nMessage    : ERROR: null value in column \"reference_id\" of relation \"api_resources\" violates not-null constraint\n  Detail: Failing row contains (1, database-service, null, t, 2025-12-21 22:03:21.529483+05:30, 2025-12-21 22:03:21.529483+05:30).\nLocation   : sql\\R__post_deploy_seed.sql (C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql)\nLine       : 11\nStatement  : INSERT INTO auth.api_resources (name)\r\nVALUES\r\n    (\u0027database-service\u0027),\r\n    (\u0027broker-service\u0027),\r\n    (\u0027auth-service\u0027)\r\nON CONFLICT (name) DO NOTHING\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": "3",
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 6
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 46
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 5
+        },
+        {
+          "category": "Repeatable",
+          "version": "",
+          "description": "post deploy seed",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql",
+          "executionTime": 13
+        }
+      ],
+      "migrationsExecuted": 4,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T22:04:03.674125900",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 6
+        }
+      ],
+      "migrationsExecuted": 1,
+      "success": false,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T22:25:06.867931600",
+      "operation": "migrate",
+      "exception": "Migration V2__tables.sql failed\n-------------------------------\nSQL State  : 42P01\nError Code : 0\nMessage    : ERROR: relation \"users\" does not exist\nLocation   : sql\\V2__tables.sql (C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql)\nLine       : 23\nStatement  : CREATE INDEX idx_users_name ON users(name)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 8
+        }
+      ],
+      "migrationsExecuted": 1,
+      "success": false,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T22:25:56.318000300",
+      "operation": "migrate",
+      "exception": "Migration V2__tables.sql failed\n-------------------------------\nSQL State  : 42P16\nError Code : 0\nMessage    : ERROR: multiple primary keys for table \"roles\" are not allowed\n  Position: 139\nLocation   : sql\\V2__tables.sql (C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql)\nLine       : 25\nStatement  : CREATE TABLE IF NOT EXISTS auth.roles (\r\n    id SERIAL         PRIMARY KEY,\r\n    name VARCHAR(50) NOT NULL UNIQUE,\r\n    reference_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\r\n    description TEXT,\r\n    is_active BOOLEAN NOT NULL DEFAULT true,\r\n    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\r\n    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\r\n)\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": "3",
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 7
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 60
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 8
+        },
+        {
+          "category": "Repeatable",
+          "version": "",
+          "description": "post deploy seed",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql",
+          "executionTime": 17
+        }
+      ],
+      "migrationsExecuted": 4,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T22:26:32.935110600",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "3",
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": false,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T22:28:27.026348400",
+      "operation": "migrate",
+      "exception": "Migration R__post_deploy_seed.sql failed\n----------------------------------------\nSQL State  : 42P01\nError Code : 0\nMessage    : ERROR: relation \"roles\" does not exist\n  Position: 13\nLocation   : sql\\R__post_deploy_seed.sql (C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql)\nLine       : 42\nStatement  : INSERT INTO roles (name, description, is_active)\r\nVALUES \r\n    (\u0027Admin\u0027, \u0027Full system access including user and role management.\u0027, true),\r\n    (\u0027User\u0027, \u0027Standard access to application features.\u0027, true),\r\n    (\u0027Guest\u0027, \u0027Read-only access to public resources.\u0027, true)\r\nON CONFLICT (name) DO NOTHING\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "3",
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Repeatable",
+          "version": "",
+          "description": "post deploy seed",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql",
+          "executionTime": 14
+        }
+      ],
+      "migrationsExecuted": 1,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-21T22:28:42.128129600",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": "3",
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 7
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 64
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 7
+        },
+        {
+          "category": "Repeatable",
+          "version": "",
+          "description": "post deploy seed",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql",
+          "executionTime": 24
+        }
+      ],
+      "migrationsExecuted": 4,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-22T07:45:54.857335300",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 9
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 85
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 8
+        }
+      ],
+      "migrationsExecuted": 3,
+      "success": false,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-22T09:38:03.070200700",
+      "operation": "migrate",
+      "exception": "Migration R__post_deploy_seed.sql failed\n----------------------------------------\nSQL State  : 42P01\nError Code : 0\nMessage    : ERROR: relation \"auth.api_scopes\" does not exist\n  Position: 13\nLocation   : sql\\R__post_deploy_seed.sql (C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql)\nLine       : 1\nStatement  : INSERT INTO auth.api_scopes (name, level)\r\nVALUES\r\n    (\u0027db.read\u0027, 1),\r\n    (\u0027db.write\u0027, 2),\r\n    (\u0027kafka.publish\u0027, 2),\r\n    (\u0027chat.read\u0027, 1),\r\n    (\u0027chat.write\u0027, 2),\r\n    (\u0027host.users.create\u0027, 3)\r\nON CONFLICT (name) DO NOTHING\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 8
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 85
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 8
+        }
+      ],
+      "migrationsExecuted": 3,
+      "success": false,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-22T09:39:24.756286900",
+      "operation": "migrate",
+      "exception": "Migration R__post_deploy_seed.sql failed\n----------------------------------------\nSQL State  : 42703\nError Code : 0\nMessage    : ERROR: column \"level\" of relation \"scopes\" does not exist\n  Position: 32\nLocation   : sql\\R__post_deploy_seed.sql (C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql)\nLine       : 1\nStatement  : INSERT INTO auth.scopes (name, level)\r\nVALUES\r\n    (\u0027db.read\u0027, 1),\r\n    (\u0027db.write\u0027, 2),\r\n    (\u0027kafka.publish\u0027, 2),\r\n    (\u0027chat.read\u0027, 1),\r\n    (\u0027chat.write\u0027, 2),\r\n    (\u0027host.users.create\u0027, 3)\r\nON CONFLICT (name) DO NOTHING\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 6
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 92
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 7
+        }
+      ],
+      "migrationsExecuted": 3,
+      "success": false,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-22T10:13:08.289326600",
+      "operation": "migrate",
+      "exception": "Migration R__post_deploy_seed.sql failed\n----------------------------------------\nSQL State  : 42703\nError Code : 0\nMessage    : ERROR: column \"description\" of relation \"roles\" does not exist\n  Position: 31\nLocation   : sql\\R__post_deploy_seed.sql (C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql)\nLine       : 76\nStatement  : INSERT INTO auth.roles (name, description, is_active)\r\nVALUES \r\n    (\u0027Admin\u0027, \u0027Full system access including user and role management.\u0027, true),\r\n    (\u0027User\u0027, \u0027Standard access to application features.\u0027, true),\r\n    (\u0027Guest\u0027, \u0027Read-only access to public resources.\u0027, true)\r\nON CONFLICT (name) DO NOTHING\n",
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": "3",
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 8
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 91
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 8
+        },
+        {
+          "category": "Repeatable",
+          "version": "",
+          "description": "post deploy seed",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql",
+          "executionTime": 29
+        }
+      ],
+      "migrationsExecuted": 4,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-22T10:14:02.449710800",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "3",
+      "targetSchemaVersion": null,
+      "schemaName": "public",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-22T10:14:14.995757100",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": null,
+      "targetSchemaVersion": "3",
+      "schemaName": "public",
+      "migrations": [
+        {
+          "category": "Versioned",
+          "version": "1",
+          "description": "schemas",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V1__schemas.sql",
+          "executionTime": 9
+        },
+        {
+          "category": "Versioned",
+          "version": "2",
+          "description": "tables",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V2__tables.sql",
+          "executionTime": 90
+        },
+        {
+          "category": "Versioned",
+          "version": "3",
+          "description": "functions",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\V3__functions.sql",
+          "executionTime": 8
+        },
+        {
+          "category": "Repeatable",
+          "version": "",
+          "description": "post deploy seed",
+          "type": "SQL",
+          "filepath": "C:\\Dev\\grpcChatApp\\DatabaseService\\Database\\sql\\R__post_deploy_seed.sql",
+          "executionTime": 32
+        }
+      ],
+      "migrationsExecuted": 4,
+      "success": true,
+      "flywayVersion": "9.22.0",
+      "database": "gChatAppDb",
+      "warnings": [],
+      "timestamp": "2025-12-22T10:21:41.084586700",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    }
+  ]
+}

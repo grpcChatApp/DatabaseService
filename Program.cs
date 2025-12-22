@@ -1,13 +1,12 @@
+using Confluent.Kafka;
+using DatabaseService;
+using DatabaseService.Application.Users;
 using DatabaseService.Contexts;
 using DatabaseService.Contracts.Grpc;
 using DatabaseService.Contracts.Kalfka;
-using DatabaseService.Data;
 using DatabaseService.Services;
-using DatabaseService;
-using Microsoft.EntityFrameworkCore;
 using DatabaseService.Services.AuthenticationService;
-using Confluent.Kafka;
-using DatabaseService.Application.Users;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,8 +19,6 @@ ConfigureServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 var _logger = app.Services.GetRequiredService<ILogger<Program>>();
-
-SeedDatabase(app.Services);
 
 // Configure Middleware
 app.UseRouting();
@@ -48,7 +45,9 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     services.AddLogging();
 
     services.AddDbContext<CoreContext>(options =>
-        options.UseNpgsql(connectionString, b => b.MigrationsAssembly("DatabaseService")));
+    options
+        .UseNpgsql(connectionString)
+        .UseSnakeCaseNamingConvention());
 }
 
 void MapEndpoints(WebApplication app)
@@ -56,21 +55,4 @@ void MapEndpoints(WebApplication app)
     app.MapGrpcService<AuthenticationService>();
     app.MapGrpcService<ClientGrpcService>();
     app.MapGrpcService<UserGrpcService>();
-}
-
-void SeedDatabase(IServiceProvider serviceProvider)
-{
-    using (var scope = serviceProvider.CreateScope())
-    {
-        var services = scope.ServiceProvider;
-        try
-        {
-            Initializer.Seed(services);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An error occurred while seeding the database.");
-        }
-    }
-
 }

@@ -46,7 +46,7 @@ namespace DatabaseService.Application.Users
             UpdateClientRequest request,
             CancellationToken ct)
         {
-            var client = await db.Clients.FirstOrDefaultAsync(c => c.ReferenceId == request.ReferenceId, ct);
+            var client = await db.Clients.FirstOrDefaultAsync(c => c.ReferenceId.ToString() == request.ReferenceId, ct);
             if (client is null) throw new KeyNotFoundException($"Client {request.ReferenceId} not found.");
 
             if (!string.IsNullOrWhiteSpace(request.Name) && request.Name != client.Name)
@@ -83,7 +83,7 @@ namespace DatabaseService.Application.Users
             DeleteClientRequest request,
             CancellationToken ct)
         {
-            var client = await db.Clients.FirstOrDefaultAsync(c => c.ReferenceId == request.ReferenceId, ct);
+            var client = await db.Clients.FirstOrDefaultAsync(c => c.ReferenceId.ToString() == request.ReferenceId, ct);
             if (client is null) throw new KeyNotFoundException($"Client {request.ReferenceId} not found.");
 
             await using var tx = await db.Database.BeginTransactionAsync(ct);

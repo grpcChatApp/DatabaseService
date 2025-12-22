@@ -1,39 +1,40 @@
-using DatabaseService.Data.Models.Auth;
 using GrpcChat.Database.Clients;
 using static Common.Constants;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
 namespace DatabaseService.Data.Models
 {
+    [Table("clients", Schema = "auth")]
     public class Client : BaseEntity
     {
         public string ClientId { get; set; } = string.Empty;
         public string ClientSecret { get; set; } = string.Empty;
         public ClientType Type { get; set; }
-        public ICollection<ClientResourceMapping> AllowedScopes { get; set; } = new List<ClientResourceMapping>();
-        public ICollection<ClientScopeMapping> AllowedResources { get; set; } = new List<ClientScopeMapping>();
+        public ICollection<ApiResource> Resources { get; set; } = new List<ApiResource>();
+        public ICollection<ApiScope> Scopes { get; set; } = new List<ApiScope>();
 
-        public static Client Create(string name, string clientId = "", ClientType type = ClientType.Confidential) => new Client
+        public static Client Create(string name) => new Client
         {
-            ReferenceId = Guid.NewGuid().ToString("N"),
+            ReferenceId = Guid.NewGuid(),
             Name = name,
             CreatedDate = DateTime.UtcNow,
             UpdatedDate = DateTime.UtcNow,
             IsActive = true,
-            ClientId = string.IsNullOrEmpty(clientId) ? Guid.NewGuid().ToString("N") : clientId,
+            ClientId = Guid.NewGuid().ToString("N"),
             ClientSecret = GenerateClientSecret(),
-            Type = type
+            Type = ClientType.Public
         };
 
         public ClientResponseDto ToDto()
         {
             return new ClientResponseDto
             {
-                Id = ReferenceId,
+                Id = ReferenceId.ToString(),
                 ClientId = ClientId,
                 ClientSecret = ClientSecret,
                 IsActive = IsActive,
                 Name = Name,
-                ReferenceId = ReferenceId
+                ReferenceId = ReferenceId.ToString()
             };
         }
 

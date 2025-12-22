@@ -7,6 +7,7 @@ using Npgsql;
 using DatabaseService.Utilities;
 using DatabaseService.Contracts.Grpc;
 using DatabaseService.Contracts.Kalfka;
+using Grpc.Core;
 
 namespace DatabaseService.Application.Users
 {
@@ -17,11 +18,20 @@ namespace DatabaseService.Application.Users
             CancellationToken ct)
         {
             var user = User.Create(request.Username, request.Email, request.Name, request.PasswordHash);
-
             await using var tx = await db.Database.BeginTransactionAsync(ct);
-
             try
             {
+                var roleGuids = request.Roles.Select(Guid.Parse).ToList();
+                if (roleGuids.Count == 0)
+                {
+                    throw new RpcException(new Status(StatusCode.InvalidArgument, "At least one role must be assigned to the user."));
+                }
+                
+                var roles = await db.Roles
+                    .Where(r => roleGuids.Contains(r.ReferenceId))
+                    .ToListAsync(ct); 
+                user.Roles = roles;
+
                 db.Users.Add(user);
                 await db.SaveChangesAsync(ct);
             }
@@ -45,7 +55,7 @@ namespace DatabaseService.Application.Users
             UpdateUserRequest request,
             CancellationToken ct)
         {
-            var user = await db.Users.FirstOrDefaultAsync(u => u.ReferenceId == request.ReferenceId, ct);
+            var user = await db.Users.FirstOrDefaultAsync(u => u.ReferenceId.ToString() == request.ReferenceId, ct);
             if (user is null) throw new KeyNotFoundException($"User {request.ReferenceId} not found.");
 
             if (!string.IsNullOrWhiteSpace(request.Username) && request.Username != user.Username)
@@ -88,7 +98,7 @@ namespace DatabaseService.Application.Users
             DeleteUserRequest request,
             CancellationToken ct)
         {
-            var user = await db.Users.FirstOrDefaultAsync(u => u.ReferenceId == request.ReferenceId, ct);
+            var user = await db.Users.FirstOrDefaultAsync(u => u.ReferenceId.ToString() == request.ReferenceId, ct);
             if (user is null) throw new KeyNotFoundException($"User {request.ReferenceId} not found.");
 
             await using var tx = await db.Database.BeginTransactionAsync(ct);

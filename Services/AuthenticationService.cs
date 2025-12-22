@@ -2,6 +2,7 @@
 using Grpc.Core;
 using DatabaseService.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi;
 namespace DatabaseService.Services.AuthenticationService
 {
     public class AuthenticationService : AuthDataService.AuthDataServiceBase
@@ -24,10 +25,7 @@ namespace DatabaseService.Services.AuthenticationService
 
         public override async Task<ApiResourcesResponseDto> GetApiResources(EmptyRequestDto request, ServerCallContext context)
         {
-            var resources = await _context.ApiResources.ToListAsync();
-            var resourceWithMappedScopes = await _context.ResourceScopeMappings.Where(rsm => resources.Select(r => r.Id).Contains(rsm.ResourceId))
-                .Include(rsm => rsm.Scope)
-                .ToListAsync();
+            var resources = await _context.ApiResources.Include(r => r.Scopes).ToListAsync();
 
             return new ApiResourcesResponseDto
             {
@@ -36,7 +34,7 @@ namespace DatabaseService.Services.AuthenticationService
                     {
                         Id = r.Id,
                         Name = r.Name,
-                        ScopeIds = { resourceWithMappedScopes.Select(rsm => rsm.ScopeId) }
+                        ScopeIds = { r.Scopes.Select(s => s.Id) }
                     })
                 }
             };
@@ -44,7 +42,7 @@ namespace DatabaseService.Services.AuthenticationService
 
         public override async Task<ClientsResponseDto> GetClients(EmptyRequestDto request, ServerCallContext context)
         {
-            var clients = await _context.Clients.Include(c => c.AllowedScopes).ToListAsync();
+            var clients = await _context.Clients.Include(c => c.Scopes).ToListAsync();
             return new ClientsResponseDto
             {
                 Clients = {
@@ -52,7 +50,7 @@ namespace DatabaseService.Services.AuthenticationService
                     {
                         Id = c.Id,
                         ClientId = c.ClientId,
-                        AllowedScopeIds = { c.AllowedScopes.Select(s => s.Id) }
+                        AllowedScopeIds = { c.Scopes.Select(s => s.Id) }
                     })
                 }
             };

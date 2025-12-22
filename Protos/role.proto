@@ -1,0 +1,47 @@
+syntax = "proto3";
+option csharp_namespace = "GrpcChat.Database.Roles";
+
+service RoleService 
+{
+  rpc GetRoleByRefId(GetRoleByRefIdRequest) returns (RoleDto);
+  rpc GetRoleByName(GetRoleByNameRequest) returns (RoleDto);
+  rpc CreateRole(CreateRoleRequest) returns (RoleDto);
+  rpc UpdateRole(UpdateRoleRequest) returns (RoleDto);
+  rpc DeleteRole(DeleteRoleRequest) returns (RoleDto);
+}
+
+message GetRoleByRefIdRequest 
+{
+  string referenceId = 1;
+}
+
+message GetRoleByNameRequest 
+{
+  string name = 1;
+}
+
+message CreateRoleRequest 
+{
+  string name = 1;
+  string description = 2;
+}
+
+message UpdateRoleRequest
+{
+  string reference_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message DeleteRoleRequest
+{
+  string reference_id = 1;
+}
+
+message RoleDto 
+{
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  bool is_active = 4;
+}

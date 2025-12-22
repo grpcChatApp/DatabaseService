@@ -1,4 +1,4 @@
-using GrpcChat.Database.Clients;
+using PingChatApp.Common.Protos;
 namespace DatabaseService.Contracts.Grpc
 {
     public interface IClientRequestsHandler

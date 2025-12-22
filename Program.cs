@@ -46,8 +46,7 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
     services.AddDbContext<CoreContext>(options =>
     options
-        .UseNpgsql(connectionString)
-        .UseSnakeCaseNamingConvention());
+        .UseNpgsql(connectionString));
 }
 
 void MapEndpoints(WebApplication app)

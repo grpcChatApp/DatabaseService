@@ -1,4 +1,4 @@
-﻿using DatabaseService.Services.AuthenticationServer;
+﻿using PingChatApp.Common.Protos;
 using Grpc.Core;
 using DatabaseService.Contexts;
 using Microsoft.EntityFrameworkCore;

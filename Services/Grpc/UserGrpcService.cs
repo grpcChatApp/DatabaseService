@@ -1,8 +1,8 @@
 using Grpc.Core;
-using GrpcChat.Database.Users;
+using PingChatApp.Common.Protos;
 using DatabaseService.Application.Users;
 
-class UserGrpcService(UserRequestHandler userRequestsHandler) : UserService.UserServiceBase
+class UserGrpcService(UserRequestHandler userRequestsHandler) : UserDataService.UserDataServiceBase
 {
     public override async Task<UserDto> CreateUser(
         CreateUserRequest request,

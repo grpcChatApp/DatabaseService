@@ -4,7 +4,7 @@ using DatabaseService.Data.KafkaEvents;
 using DatabaseService.Data.Models;
 using Common.Data.KafkaEvents;
 using DatabaseService.Utilities;
-using GrpcChat.Database.Clients;
+using PingChatApp.Common.Protos;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using DatabaseService.Contracts.Grpc;

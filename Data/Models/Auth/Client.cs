@@ -1,4 +1,4 @@
-using GrpcChat.Database.Clients;
+using PingChatApp.Common.Protos;
 using static Common.Constants;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;

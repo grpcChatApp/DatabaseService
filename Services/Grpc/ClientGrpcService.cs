@@ -1,10 +1,9 @@
 using Grpc.Core;
-using GrpcChat.Database.Clients;
+using PingChatApp.Common.Protos;
 using DatabaseService.Application.Users;
-using DatabaseService.Services.AuthenticationServer;
-using ClientDto = GrpcChat.Database.Clients;
+using ClientDto = PingChatApp.Common.Protos;
 
-class ClientGrpcService(ClientRequestsHandler clientRequestsHandler) : ClientService.ClientServiceBase
+class ClientGrpcService(ClientRequestsHandler clientRequestsHandler) : ClientDataService.ClientDataServiceBase
 {
     public override async Task<ClientResponseDto> CreateClient(
         CreateClientRequest request,

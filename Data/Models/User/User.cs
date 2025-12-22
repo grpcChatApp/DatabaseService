@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using GrpcChat.Database.Users;
+using PingChatApp.Common.Protos;
 namespace DatabaseService.Data.Models
 {
     [Table("users", Schema = "auth")]

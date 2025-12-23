@@ -23,13 +23,13 @@ namespace DatabaseService.Data.Models
             Roles = new List<Role>()
         };
 
-        public UserDto ToDto() => new()
+        public UserResponse ToDto() => new()
         {
-            Id = ReferenceId.ToString(),
+            Id = Id,
             Username = Username,
             Email = Email,
             IsActive = IsActive,
-            Name = Name
+            DisplayName = Name
         };
     }
 }

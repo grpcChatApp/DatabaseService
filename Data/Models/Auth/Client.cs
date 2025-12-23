@@ -25,9 +25,9 @@ namespace DatabaseService.Data.Models
             Type = ClientType.Public
         };
 
-        public ClientResponseDto ToDto()
+        public ClientResponse ToDto()
         {
-            return new ClientResponseDto
+            return new ClientResponse
             {
                 Id = ReferenceId.ToString(),
                 ClientId = ClientId,

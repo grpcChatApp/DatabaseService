@@ -19,12 +19,6 @@
             Admin = 4
         }
 
-        public enum ClientType
-        {
-            Confidential = 1,
-            Public = 2
-        }
-
         public enum SystemRoles
         {
             Admin = 1,

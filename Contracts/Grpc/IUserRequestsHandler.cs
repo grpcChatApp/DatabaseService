@@ -3,8 +3,8 @@ namespace DatabaseService.Contracts.Grpc
 {
     public interface IUserRequestsHandler
     {
-        public Task<UserDto> CreateUser(CreateUserRequest request, CancellationToken ct);
-        public Task<UserDto> UpdateUser(UpdateUserRequest request, CancellationToken ct);
-        public Task<UserDto> DeleteUser(DeleteUserRequest request, CancellationToken ct);
+        public Task<UserResponse> CreateUser(CreateUserRequest request, CancellationToken ct);
+        public Task<UserResponse> UpdateUser(UpdateUserRequest request, CancellationToken ct);
+        public Task<UserResponse> DeleteUser(DeleteUserRequest request, CancellationToken ct);
     }
 }

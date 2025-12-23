@@ -2,59 +2,94 @@
 using Grpc.Core;
 using DatabaseService.Contexts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi;
+using BCrypt.Net;
+
 namespace DatabaseService.Services.AuthenticationService
 {
     public class AuthenticationService : AuthDataService.AuthDataServiceBase
     {
-        private readonly CoreContext _context;
+        private readonly CoreContext _db;
 
-        public AuthenticationService(CoreContext context)
+        public AuthenticationService(CoreContext db)
         {
-            _context = context;
+            _db = db;
         }
 
-        public override async Task<ApiScopesResponseDto> GetApiScopes(EmptyRequestDto request, ServerCallContext context)
+        // Client Credentials flow
+        public override async Task<ResolvedClientAuthorization> ResolveClientAuthorization(
+            ResolveClientAuthRequest request,
+            ServerCallContext context)
         {
-            var scopes = await _context.ApiScopes.ToListAsync();
-            return new ApiScopesResponseDto
+            var client = await _db.Clients
+                .Include(c => c.Resources)
+                    .ThenInclude(r => r.Scopes)
+                .FirstOrDefaultAsync(c =>
+                    c.ClientId == request.ClientId && c.IsActive);
+
+            if (client == null)
+                throw new RpcException(new Status(StatusCode.NotFound, "Client not found"));
+
+            var response = new ResolvedClientAuthorization
             {
-                Scopes = { scopes.Select(s => new ApiScopeDto { Id = s.Id, Name = s.Name }) }
+                ClientId = client.ClientId
             };
-        }
 
-        public override async Task<ApiResourcesResponseDto> GetApiResources(EmptyRequestDto request, ServerCallContext context)
-        {
-            var resources = await _context.ApiResources.Include(r => r.Scopes).ToListAsync();
-
-            return new ApiResourcesResponseDto
+            foreach (var resource in client.Resources)
             {
-                Resources = {
-                    resources.Select(r => new ApiResourceDto
+                foreach (var scope in resource.Scopes)
+                {
+                    response.Scopes.Add(new ScopeResponse
                     {
-                        Id = r.Id,
-                        Name = r.Name,
-                        ScopeIds = { r.Scopes.Select(s => s.Id) }
-                    })
+                        Name = scope.Name,
+                        Resource = resource.Name
+                    });
                 }
+            }
+
+            return response;
+        }
+
+        // Password flow
+        public override async Task<ValidateUserResponse> ValidateUserCredentials(
+            ValidateUserRequest request,
+            ServerCallContext context)
+        {
+            var user = await _db.Users
+                .Include(u => u.Roles)
+                .FirstOrDefaultAsync(u =>
+                    u.Username == request.Username && u.IsActive);
+
+            if (user == null)
+                return new ValidateUserResponse { Success = false };
+
+            var isValid = BCrypt.Net.BCrypt.Verify(
+                request.Password,
+                user.PasswordHash
+            );
+
+            return new ValidateUserResponse
+            {
+                Success = isValid,
+                UserId = user.Id
             };
         }
 
-        public override async Task<ClientsResponseDto> GetClients(EmptyRequestDto request, ServerCallContext context)
+        // AuthCode flow
+        public async override Task<ValidateAuthCodeResponse> ValidateAuthorizationCode(
+            ValidateAuthCodeRequest request,
+            ServerCallContext context)
         {
-            var clients = await _context.Clients.Include(c => c.Scopes).ToListAsync();
-            return new ClientsResponseDto
-            {
-                Clients = {
-                    clients.Select(c => new ClientDto
-                    {
-                        Id = c.Id,
-                        ClientId = c.ClientId,
-                        AllowedScopeIds = { c.Scopes.Select(s => s.Id) }
-                    })
-                }
-            };
+            // In AuthServer - not needed 
+            throw new NotImplementedException();
+        }
+
+        // Token flow
+        public override Task<ValidateAccessTokenResponse> ValidateAccessToken(
+            ValidateAccessTokenRequest request,
+            ServerCallContext context)
+        {
+            // In AuthServer - not needed 
+            throw new NotImplementedException();
         }
     }
-
 }

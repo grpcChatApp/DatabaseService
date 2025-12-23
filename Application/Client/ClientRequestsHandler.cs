@@ -13,7 +13,7 @@ namespace DatabaseService.Application.Users
 {
     public sealed class ClientRequestsHandler(CoreContext db, IKafkaPublisher publisher) : IClientRequestsHandler
     {
-        public async Task<ClientResponseDto> CreateClient(
+        public async Task<ClientResponse> CreateClient(
             CreateClientRequest request,
             CancellationToken ct)
         {
@@ -42,7 +42,7 @@ namespace DatabaseService.Application.Users
             return client.ToDto();
         }
 
-        public async Task<ClientResponseDto> UpdateClient(
+        public async Task<ClientResponse> UpdateClient(
             UpdateClientRequest request,
             CancellationToken ct)
         {
@@ -79,7 +79,7 @@ namespace DatabaseService.Application.Users
             return client.ToDto();
         }
 
-        public async Task<ClientResponseDto> DeleteClient(
+        public async Task<ClientResponse> DeleteClient(
             DeleteClientRequest request,
             CancellationToken ct)
         {

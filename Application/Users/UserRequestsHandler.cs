@@ -13,7 +13,7 @@ namespace DatabaseService.Application.Users
 {
     public sealed class UserRequestHandler(CoreContext db, IKafkaPublisher publisher) : IUserRequestsHandler
     {
-        public async Task<UserDto> CreateUser(
+        public async Task<UserResponse> CreateUser(
             CreateUserRequest request,
             CancellationToken ct)
         {
@@ -51,7 +51,7 @@ namespace DatabaseService.Application.Users
             return user.ToDto();
         }
 
-        public async Task<UserDto> UpdateUser(
+        public async Task<UserResponse> UpdateUser(
             UpdateUserRequest request,
             CancellationToken ct)
         {
@@ -94,7 +94,7 @@ namespace DatabaseService.Application.Users
             return user.ToDto();
         }
 
-        public async Task<UserDto> DeleteUser(
+        public async Task<UserResponse> DeleteUser(
             DeleteUserRequest request,
             CancellationToken ct)
         {
